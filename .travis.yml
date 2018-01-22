@@ -1,0 +1,12 @@
+sudo: enabled
+language: node_js
+node_js:
+- '9.2.0'
+before_install:
+- yarn global add typescript tslint
+cache: yarn
+install:
+- yarn
+script:
+- tslint ./src/**/*.ts
+- yarn test:coverage
