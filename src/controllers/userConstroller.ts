@@ -1,7 +1,7 @@
 import MainService from '../services';
 import { chackChannelName, checkEmail, checkName, checkPass } from '../utils/';
 
-import { USERC_CREATE_SUCCES } from '../utils/app_codes';
+import { USER_CREATE_SUCCES } from '../utils/app_codes';
 
 import * as status from 'http-status';
 
@@ -20,7 +20,7 @@ export class UserController {
       await this.service.createUser(reqBody);
       ctx.body = {
         // here will be text message, when locale dictionary  will be created
-        message: USERC_CREATE_SUCCES
+        message: USER_CREATE_SUCCES
       };
     } catch (e) {
       ctx.body = {
