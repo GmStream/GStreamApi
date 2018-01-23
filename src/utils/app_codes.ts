@@ -1,0 +1,1 @@
+export const USERC_CREATE_SUCCES = 11200;
