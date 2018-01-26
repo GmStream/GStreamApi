@@ -20,4 +20,13 @@ export default class MainService {
       await this.userService.create(payload);
     }
   };
+
+  public confirmUser = async (email: string) => {
+    const user = await this.getUserByEmail(email);
+    if (!user) {
+      throw new ActionErrors(ERROR_CODES.USER_EXIST);
+    } else {
+      await this.userService.confirm(email);
+    }
+  };
 }

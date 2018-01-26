@@ -1,5 +1,6 @@
 import * as bcrypt from 'bcrypt-nodejs';
 import * as mongoose from 'mongoose';
+import { sendEmail } from '../utils/mailer';
 
 import { InterfaceUser } from '../interfaces';
 
@@ -75,8 +76,9 @@ UserSchema.pre('save', function(next) {
   });
 });
 
-UserSchema.post('save', async () => {
-  global.console.log('Here comes email message');
+UserSchema.post('save', async function() {
+  const user = this;
+  await sendEmail(this.email, this.name);
 });
 
 export { UserSchema };

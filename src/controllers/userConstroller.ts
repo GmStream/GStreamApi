@@ -1,6 +1,6 @@
 import MainService from '../services';
+import { decodeToken } from '../utils';
 import { chackChannelName, checkEmail, checkName, checkPass } from '../utils/';
-
 import { USER_CREATE_SUCCES } from '../utils/app_codes';
 
 import * as status from 'http-status';
@@ -27,6 +27,18 @@ export class UserController {
         Error: e.message
       };
       ctx.status = status.UNPROCESSABLE_ENTITY;
+    }
+  };
+
+  public confirmation = async (ctx: Koa.Context) => {
+    const reqBody = ctx.request.body;
+    try {
+      const email: string | null = decodeToken(reqBody.token);
+      if (email) {
+        await this.service.confirmUser(email);
+      }
+    } catch (e) {
+      // here come error throwing
     }
   };
 }
