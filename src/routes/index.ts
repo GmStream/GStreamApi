@@ -6,4 +6,5 @@ const router = new Router();
 
 router.use('/api/user', user.routes());
 
+
 export default router;

@@ -34,6 +34,7 @@
     "all": true
   },
   "dependencies": {
+    "@koa/cors": "^2.2.1",
     "@types/bcrypt-nodejs": "^0.0.30",
     "@types/bluebird": "^3.5.19",
     "@types/dotenv": "^4.0.2",

@@ -9,6 +9,9 @@ import * as logger from 'koa-logger';
 import * as mongoose from 'mongoose';
 import routes from './routes';
 
+// tslint:disable-next-line:no-var-requires
+const cors = require('@koa/cors');
+
 // any 'cause db variable should be string or undefined
 
 let db: any;
@@ -26,6 +29,7 @@ mongoose.set('debug', true);
 const app = new Koa();
 
 app
+  .use(cors())
   .use(bodyParser())
   .use(logger())
   .use(routes.routes())
