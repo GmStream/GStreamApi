@@ -33,12 +33,38 @@ export class UserController {
   public confirmation = async (ctx: Koa.Context) => {
     const reqBody = ctx.request.body;
     try {
-      const email: string | null = decodeToken(reqBody.token);
+      const data: any = decodeToken(reqBody.token);
+      const email = data.email;
       if (email) {
         await this.service.confirmUser(email);
+        ctx.status = status.OK;
       }
     } catch (e) {
-      // here come error throwing
+      ctx.body = {
+        Error: e.message
+      };
+      ctx.status = status.UNPROCESSABLE_ENTITY;
+    }
+  };
+
+  public signIn = async (ctx: Koa.Context) => {
+    const reqBody = ctx.request.body;
+
+    try {
+      const token = await this.service.signIn(reqBody);
+      if (token) {
+        ctx.body = {
+          token
+        };
+        ctx.status = status.OK;
+      } else {
+        ctx.status = status.UNPROCESSABLE_ENTITY;
+      }
+    } catch (e) {
+      ctx.body = {
+        Error: e.message
+      };
+      ctx.status = status.UNPROCESSABLE_ENTITY;
     }
   };
 }

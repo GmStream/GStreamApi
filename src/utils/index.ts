@@ -35,11 +35,15 @@ export const chackChannelName = (channelName: string) => {
   }
 };
 
+export const getToken = (data: any) => {
+  return jwt.sign(data, jwtSecret, { noTimestamp: true });
+};
+
 export const decodeToken = (token: string) => {
   let decoded: any | null = null;
   jwt.verify(token, jwtSecret, (err: any, res: any) => {
     if (err) {
-      // here comes error
+      // add error
     }
     decoded = res;
   });

@@ -1,6 +1,7 @@
 import * as jwt from 'jsonwebtoken';
 import * as nodemailer from 'nodemailer';
 import { jwtSecret, mail, url } from '../config';
+import { getToken } from './';
 
 const transport = nodemailer.createTransport(mail);
 
@@ -38,7 +39,7 @@ const generateEmail = (name: string, token: string) => {
             'перейдя по ссылке.'}</p>
           <div style="display: flex; justify-content: flex-end;"> 
             <button style="padding: 0px; background-color: green; margin-bottom: 20px; border-color: transparent; font-size: 0.9rem; border-radius: 3px;">
-              <a href="http://${url}/confirmation/?token=${token}" style="display: block; padding: 10px; text-decoration: none; color: rgba(0, 0, 0, 0.7);">${'Подтвердить'}</a>
+              <a href="http://${url}/?token=${token}" style="display: block; padding: 10px; text-decoration: none; color: rgba(0, 0, 0, 0.7);">${'Подтвердить'}</a>
             </button>
           </div>
           <hr style="color: #95989a">
@@ -46,19 +47,4 @@ const generateEmail = (name: string, token: string) => {
         </div>
       </div>
     </div>`;
-};
-
-export const getToken = (data: any) => {
-  return jwt.sign(data, jwtSecret, { noTimestamp: true });
-};
-
-export const decodeToken = (token: string) => {
-  let decoded: any | null = null;
-  jwt.verify(token, jwtSecret, (err: any, res: any) => {
-    if (err) {
-      // add error
-    }
-    decoded = res;
-  });
-  return decoded;
 };
