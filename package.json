@@ -49,6 +49,7 @@
     "@types/lodash": "^4.14.93",
     "@types/mongoose": "^4.7.33",
     "@types/nodemailer": "^4.3.1",
+    "@types/socket.io": "^1.4.31",
     "@types/winston": "^2.3.7",
     "bcrypt-nodejs": "^0.0.3",
     "bluebird": "^3.5.1",
@@ -65,6 +66,7 @@
     "lodash": "^4.17.4",
     "mongoose": "^5.0.1",
     "nodemailer": "^4.4.2",
+    "socket.io": "^2.0.4",
     "ts-node": "^4.1.0",
     "typescript": "^2.6.2",
     "winston": "^2.4.0"

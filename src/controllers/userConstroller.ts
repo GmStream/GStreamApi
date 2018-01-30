@@ -6,6 +6,7 @@ import { USER_CREATE_SUCCES } from '../utils/app_codes';
 import * as status from 'http-status';
 
 import * as Koa from 'koa';
+import appLogger from '../utils/logger';
 
 export class UserController {
   public service = new MainService();
@@ -23,6 +24,7 @@ export class UserController {
         message: USER_CREATE_SUCCES
       };
     } catch (e) {
+      appLogger.error('Sign up error', e);
       ctx.body = {
         Error: e.message
       };
@@ -40,6 +42,7 @@ export class UserController {
         ctx.status = status.OK;
       }
     } catch (e) {
+      appLogger.error('Confirmation error', e);
       ctx.body = {
         Error: e.message
       };
@@ -64,6 +67,7 @@ export class UserController {
       ctx.body = {
         Error: e.message
       };
+      appLogger.error('Sign in error', e);
       ctx.status = status.UNPROCESSABLE_ENTITY;
     }
   };

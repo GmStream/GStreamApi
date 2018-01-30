@@ -7,7 +7,10 @@ import * as Koa from 'koa';
 import * as bodyParser from 'koa-bodyparser';
 import * as logger from 'koa-logger';
 import * as mongoose from 'mongoose';
+import * as io from 'socket.io';
 import routes from './routes';
+
+import appLogger from './utils/logger';
 
 // tslint:disable-next-line:no-var-requires
 const cors = require('@koa/cors');
@@ -32,5 +35,10 @@ app
   .use(cors())
   .use(bodyParser())
   .use(logger())
-  .use(routes.routes())
-  .listen(process.env.PORT);
+  .use(routes.routes());
+
+const server = app.listen(process.env.PORT);
+
+const socket = io.listen(server);
+
+socket.on('connection', () => appLogger.info('connected'));

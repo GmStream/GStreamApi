@@ -3,6 +3,8 @@ import * as nodemailer from 'nodemailer';
 import { jwtSecret, mail, url } from '../config';
 import { getToken } from './';
 
+import appLogger from './logger';
+
 const transport = nodemailer.createTransport(mail);
 
 export const sendEmail = (email: string, name: string) => {
@@ -16,7 +18,7 @@ export const sendEmail = (email: string, name: string) => {
     },
     (err, info) => {
       // change console log to winston log
-      global.console.log(`The mail sent to ${email}`);
+      appLogger.info(`The mail sent to ${email}`);
       if (err) {
         throw err;
       }
