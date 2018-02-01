@@ -8,22 +8,24 @@ import appLogger from './logger';
 const transport = nodemailer.createTransport(mail);
 
 export const sendEmail = (email: string, name: string) => {
-  const token: string = getToken({ email });
-  const html = generateEmail(name, token);
-  transport.sendMail(
-    {
-      from: 'Car Finder',
-      html,
-      to: email
-    },
-    (err, info) => {
-      // change console log to winston log
-      appLogger.info(`The mail sent to ${email}`);
-      if (err) {
-        throw err;
+  if (process.env.NODE_ENV === 'production') {
+    const token: string = getToken({ email });
+    const html = generateEmail(name, token);
+    transport.sendMail(
+      {
+        from: 'Car Finder',
+        html,
+        to: email
+      },
+      (err, info) => {
+        // change console log to winston log
+        appLogger.info(`The mail sent to ${email}`);
+        if (err) {
+          throw err;
+        }
       }
-    }
-  );
+    );
+  }
 };
 
 // change hardcoded string

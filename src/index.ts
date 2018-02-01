@@ -3,11 +3,12 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 import * as bluebird from 'bluebird';
+import * as http from 'http';
 import * as Koa from 'koa';
 import * as bodyParser from 'koa-bodyparser';
 import * as logger from 'koa-logger';
 import * as mongoose from 'mongoose';
-import * as io from 'socket.io';
+import * as socket from 'socket.io';
 import routes from './routes';
 
 import appLogger from './utils/logger';
@@ -37,8 +38,11 @@ app
   .use(logger())
   .use(routes.routes());
 
-const server = app.listen(process.env.PORT);
+const server = http.createServer(app.callback());
+const io = socket.listen(server);
 
-const socket = io.listen(server);
+server.listen(process.env.PORT);
 
-socket.on('connection', () => appLogger.info('connected'));
+// TODO:
+// use sockets io for chat only
+// for streaming use rmtp server (nginx or create own service)
