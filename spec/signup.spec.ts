@@ -4,7 +4,6 @@ import { assert, expect, should } from 'chai';
 import { error } from 'util';
 import { User } from '../src/schemes';
 import MainService from '../src/services';
-import { getToken } from '../src/utils';
 
 const mainService = new MainService();
 const payload = {
@@ -15,8 +14,11 @@ const payload = {
 };
 
 describe('Sign Up specs', () => {
-  it('Should create new user with setted user data', async () => {
+  beforeEach(async () => {
     await mainService.createUser(payload);
+  });
+
+  it('Should create new user with setted user data', async () => {
     const user = await mainService.getUserByEmail(payload.email);
     assert.equal(user.email, payload.email);
     assert.equal(user.name, payload.name);
@@ -24,17 +26,22 @@ describe('Sign Up specs', () => {
     assert.equal(user.confirmed, false);
   });
 
-  afterEach(async () => {
-    await User.remove({});
-  });
-
   it('Should throw an error when account with current email is exist', async () => {
-    await mainService.createUser(payload);
     try {
       await mainService.createUser(payload);
       assert.fail('error not thrown');
     } catch (error) {
       expect(error).to.have.property('message');
     }
+  });
+
+  it('Shoul confirm account if user followed link', async () => {
+    await mainService.confirmUser(payload.email);
+    const user = await mainService.getUserByEmail(payload.email);
+    assert.equal(user.confirmed, true, 'setted true flag to confirmed fiels');
+  });
+
+  afterEach(async () => {
+    await User.remove({});
   });
 });
