@@ -35,7 +35,7 @@ export default class MainService {
     const user = await this.getUserByEmail(payload.email);
     if (user) {
       const isPassMatch = user.comparePassword(payload.password);
-      if (isPassMatch) {
+      if (isPassMatch && user.confirmed) {
         const tokenData = {
           channelName: user.channelName,
           email: user.email,
@@ -43,6 +43,10 @@ export default class MainService {
         };
         const token = getToken(tokenData);
         return token;
+      } else if (!user.confirmed) {
+        throw new ActionErrors(ERROR_CODES.USER_ACCOUNT_NOT_CONFIRMED);
+      } else {
+        throw new ActionErrors(ERROR_CODES.WRONG_PASSWORD_OR_USERNAME);
       }
     }
   };
