@@ -28,8 +28,11 @@ if (process.env.NODE_ENV === 'production') {
 
 (mongoose as any).Promise = bluebird;
 mongoose.connect(db);
-mongoose.set('debug', true);
-
+if (process.env.NODE_ENV === 'production') {
+  mongoose.set('debug', false);
+} else {
+  mongoose.set('debug', true);
+}
 const app = new Koa();
 
 app
