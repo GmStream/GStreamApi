@@ -13,4 +13,8 @@ export default class UserService {
   public create = async (payload: InterfaceUserPayload) => {
     return await this.userRepo.create(payload);
   };
+
+  public confirm = async (email: string) => {
+    return await this.userRepo.confirm(email);
+  };
 }

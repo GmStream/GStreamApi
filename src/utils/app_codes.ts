@@ -1,1 +1,1 @@
-export const USERC_CREATE_SUCCES = 11200;
+export const USER_CREATE_SUCCES = 11200;

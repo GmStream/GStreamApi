@@ -11,4 +11,8 @@ export default class UserRepository {
     const user = new User(payload);
     await user.save();
   };
+
+  public confirm = async (email: string) => {
+    await User.update({ email }, { $set: { confirmed: true } });
+  };
 }

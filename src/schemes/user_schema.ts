@@ -1,10 +1,11 @@
 import * as bcrypt from 'bcrypt-nodejs';
 import * as mongoose from 'mongoose';
+import { sendEmail } from '../utils/mailer';
 
 import { InterfaceUser } from '../interfaces';
 
 export interface IUserModel extends InterfaceUser, mongoose.Document {
-  comparePassword(candidatePassword: string, callback: any): any;
+  comparePassword(candidatePassword: string): boolean;
 }
 
 const UserSchema = new mongoose.Schema(
@@ -75,8 +76,17 @@ UserSchema.pre('save', function(next) {
   });
 });
 
-UserSchema.post('save', async () => {
-  global.console.log('Here comes email message');
+UserSchema.post('save', async function() {
+  const user = this;
+  await sendEmail(this.email, this.name);
 });
+
+UserSchema.methods.comparePassword = function(candidatePassword: string): boolean {
+  if (bcrypt.compareSync(candidatePassword, this.password)) {
+    return true;
+  } else {
+    return false;
+  }
+};
 
 export { UserSchema };
