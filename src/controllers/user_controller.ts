@@ -52,7 +52,6 @@ export class UserController {
 
   public signIn = async (ctx: Koa.Context) => {
     const reqBody = ctx.request.body;
-
     try {
       const token = await this.service.signIn(reqBody);
       if (token) {

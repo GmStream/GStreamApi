@@ -9,7 +9,6 @@ export default class UserService {
   public getByEmail = async (email: string) => {
     return await this.userRepo.getByEmail(email);
   };
-
   public create = async (payload: InterfaceUserPayload) => {
     return await this.userRepo.create(payload);
   };

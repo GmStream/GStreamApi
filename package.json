@@ -6,7 +6,7 @@
   "author": "Elijah <ilya.bobr.thj@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": " NODE_ENV=${NODE_ENV:=production}    nodemon -w src -x ts-node  src/index.ts",
+    "dev": "nodemon -w src -x ts-node  src/index.ts",
     "test":
       "NODE_ENV=${NODE_ENV:=test}  mocha --exit --timeout 15000 -r  ts-node/register spec/**/*.ts",
     "test:coverage":
