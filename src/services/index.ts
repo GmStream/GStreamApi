@@ -1,24 +1,50 @@
+import { ISteamModel } from '../schemes/stream_scheme';
 import { IUserModel } from '../schemes/user_schema';
 import { getToken } from '../utils';
 import ERROR_CODES from '../utils/error_codes';
 import ActionErrors from '../utils/errors/action_errors';
+import StreamService from './stream_service';
 import UserService from './user_service';
 
 import { InterfaceUserPayload } from '../interfaces';
 
 export default class MainService {
   public userService = new UserService();
+  public streamService = new StreamService();
 
   public getUserByEmail = async (email: string) => {
     return await this.userService.getByEmail(email);
   };
 
-  public createUser = async (payload: InterfaceUserPayload) => {
+  public createChannel = async (channelName: string, userId: string) => {
+    await this.streamService.create({
+      channelName,
+      userId
+    });
+  };
+
+  public getChannelByName = async (channelName: string) => {
+    return await this.streamService.getByName(channelName);
+  };
+
+  public createUser = async (payload: any) => {
     const user = await this.getUserByEmail(payload.email);
-    if (user) {
+    const channel = await this.getChannelByName(payload.channelName);
+    if (channel || user) {
       throw new ActionErrors(ERROR_CODES.USER_EXIST);
     } else {
-      await this.userService.create(payload);
+      try {
+        const userData = {
+          email: payload.email,
+          name: payload.name,
+          password: payload.password
+        };
+        const userId = await this.userService.create(userData);
+        global.console.log(userId);
+        this.createChannel(payload.channelName, userId);
+      } catch (error) {
+        global.console.log(error);
+      }
     }
   };
 
@@ -27,7 +53,11 @@ export default class MainService {
     if (!user) {
       throw new ActionErrors(ERROR_CODES.USER_EXIST);
     } else {
-      await this.userService.confirm(email);
+      try {
+        await this.userService.confirm(email);
+      } catch (error) {
+        global.console.log(error);
+      }
     }
   };
 
@@ -37,7 +67,6 @@ export default class MainService {
       const isPassMatch = user.comparePassword(payload.password);
       if (isPassMatch && user.confirmed) {
         const tokenData = {
-          channelName: user.channelName,
           email: user.email,
           name: user.name
         };

@@ -1,8 +1,6 @@
 export interface InterfaceUser {
-  channelName: string;
   confirmed: boolean;
   email: string;
-  image: string;
   interfaceLang: string;
   name: string;
   password: string;
@@ -10,8 +8,13 @@ export interface InterfaceUser {
 }
 
 export interface InterfaceUserPayload {
-  channelName: string;
   email: string;
   name: string;
   password: string;
+}
+
+export interface InterfaceChannel {
+  channelName: string;
+  userId: string;
+  image: string;
 }

@@ -10,6 +10,8 @@ export default class UserRepository {
   public create = async (payload: InterfaceUserPayload) => {
     const user = new User(payload);
     await user.save();
+    const newUser = await User.find({ email: payload.email });
+    return newUser[0].id;
   };
 
   public confirm = async (email: string) => {

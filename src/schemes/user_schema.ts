@@ -10,11 +10,6 @@ export interface IUserModel extends InterfaceUser, mongoose.Document {
 
 const UserSchema = new mongoose.Schema(
   {
-    channelName: {
-      required: true,
-      type: String,
-      uniquie: true
-    },
     confirmed: {
       default: false,
       type: Boolean
@@ -24,10 +19,6 @@ const UserSchema = new mongoose.Schema(
       required: true,
       type: String,
       unique: true
-    },
-    image: {
-      default: '',
-      type: String
     },
     interfaceLang: {
       default: 'ru',
