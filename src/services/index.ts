@@ -29,8 +29,12 @@ export default class MainService {
 
   public createUser = async (payload: any) => {
     const user = await this.getUserByEmail(payload.email);
-    const channel = await this.getChannelByName(payload.channelName);
-    if (channel || user) {
+    let channel: any = null;
+    if (user) {
+      channel = await this.getChannelByName(payload.channelName);
+    }
+
+    if (channel) {
       throw new ActionErrors(ERROR_CODES.USER_EXIST);
     } else {
       try {
