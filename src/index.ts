@@ -46,6 +46,4 @@ const io = socket.listen(server);
 
 server.listen(process.env.PORT);
 
-// TODO:
-// use sockets io for chat only
-// for streaming use rmtp server (nginx or create own service)
+io.on('connection', (sock: any) => appLogger.info('connected' + sock.id, sock));
