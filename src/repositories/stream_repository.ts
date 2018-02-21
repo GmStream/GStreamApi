@@ -10,4 +10,11 @@ export default class ChannelRepository {
   public getByName = async (channelName: string) => {
     return await Channel.find({ channelName });
   };
+
+  public start = async (payload: any) => {
+    return await Channel.findOneAndUpdate(
+      { id: payload.id },
+      { $set: { ifStreaming: true, streamName: payload.name } }
+    );
+  };
 }

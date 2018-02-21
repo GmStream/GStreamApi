@@ -23,6 +23,10 @@ export default class MainService {
     });
   };
 
+  public startStream = async (payload: any) => {
+    await this.streamService.start(payload);
+  };
+
   public getChannelByName = async (channelName: string) => {
     return await this.streamService.getByName(channelName);
   };
@@ -44,10 +48,9 @@ export default class MainService {
           password: payload.password
         };
         const userId = await this.userService.create(userData);
-        global.console.log(userId);
         this.createChannel(payload.channelName, userId);
       } catch (error) {
-        global.console.log(error);
+        // add errors
       }
     }
   };
@@ -60,7 +63,7 @@ export default class MainService {
       try {
         await this.userService.confirm(email);
       } catch (error) {
-        global.console.log(error);
+        // todo : add errors
       }
     }
   };

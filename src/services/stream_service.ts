@@ -10,4 +10,8 @@ export default class StreamService {
   public getByName = async (channelName: string) => {
     return await this.repository.getByName(channelName);
   };
+
+  public start = async (payload: any) => {
+    return await this.repository.start(payload);
+  };
 }

@@ -17,6 +17,14 @@ const ChannelScheme = new mongoose.Schema({
     default: '',
     type: String
   },
+  isStreaming: {
+    default: false,
+    type: Boolean
+  },
+  streamName: {
+    default: '',
+    type: String
+  },
   userId: {
     required: true,
     type: String

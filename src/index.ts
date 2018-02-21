@@ -12,7 +12,6 @@ import * as socket from 'socket.io';
 import routes from './routes';
 
 import appLogger from './utils/logger';
-import { globalAgent } from 'https';
 
 // tslint:disable-next-line:no-var-requires
 const cors = require('@koa/cors');

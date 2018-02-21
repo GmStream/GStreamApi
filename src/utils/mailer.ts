@@ -18,7 +18,6 @@ export const sendEmail = (email: string, name: string) => {
         to: email
       },
       (err, info) => {
-        // change console log to winston log
         appLogger.info(`The mail sent to ${email}`);
         if (err) {
           throw err;
