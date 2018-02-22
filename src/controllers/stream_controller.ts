@@ -29,6 +29,20 @@ export class StreamConlroller {
       ctx.status = status.BAD_REQUEST;
     }
   };
+
+  public loadChannels = async (ctx: Koa.Context) => {
+    const payload = ctx.request.body;
+
+    try {
+      const channels = await this.mainService.loadChannels(payload);
+      ctx.status = status.OK;
+      ctx.body = {
+        channels
+      };
+    } catch (error) {
+      ctx.status = status.BAD_REQUEST;
+    }
+  };
 }
 
 export default new StreamConlroller();

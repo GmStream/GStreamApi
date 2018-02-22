@@ -17,4 +17,17 @@ export default class ChannelRepository {
       { $set: { ifStreaming: true, streamName: payload.name } }
     );
   };
+
+  public loadChannels = async (payload: any) => {
+    const skip = payload.skip || 0;
+    if (payload.searchString) {
+      return await Channel.find({ name: `/.*${payload.searchString}.*/gi` })
+        .skip(skip)
+        .limit(payload.limit);
+    } else {
+      return await Channel.find({})
+        .skip(skip)
+        .limit(payload.limit);
+    }
+  };
 }
