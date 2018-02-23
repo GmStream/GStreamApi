@@ -51,6 +51,7 @@ io.on('connection', sock => {
   sock.on('join_room', (payload: any) => {
     sock.join(payload.roomId);
     io.to(payload.roomId).emit('message', { message: `User ${payload.user} joined to stream` });
+    appLogger.info(`User ${payload.user}  joined to room ${payload.roomId}`);
   });
 
   sock.on('room_message', (payload: any) => {
