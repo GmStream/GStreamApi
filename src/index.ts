@@ -60,6 +60,7 @@ io.on('connection', sock => {
 
   sock.on('leave_room', (payload: any) => {
     sock.leave(payload.roomId);
+    appLogger.info(`User ${payload.user}  leave room ${payload.roomId}`);
     io.to(payload.roomId).emit('message', { message: `User ${payload.user} leave stream` });
   });
 });
