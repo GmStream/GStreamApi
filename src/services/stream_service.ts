@@ -20,6 +20,10 @@ export default class StreamService {
   };
 
   public stop = async (payload: any) => {
-    return await this.repository.loadChannels(payload);
+    await this.repository.loadChannels(payload);
+  };
+
+  public getUserStreamKey = async (payload: any) => {
+    return await this.repository.getUserStreamKey(payload);
   };
 }

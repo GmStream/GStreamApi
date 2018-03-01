@@ -23,6 +23,10 @@ export default class MainService {
     });
   };
 
+  public getUserStreamKey = async (payload: any) => {
+    return await this.streamService.getUserStreamKey(payload);
+  };
+
   public loadChannels = async (payload: any) => {
     return await this.streamService.loadChannels(payload);
   };

@@ -31,7 +31,12 @@ export default class ChannelRepository {
     }
   };
 
+  public getUserStreamKey = async (payload: any) => {
+    const stream: any = await Channel.findOne({ userId: payload.id });
+    return stream.id;
+  };
+
   public stop = async (payload: any) => {
-    return await Channel.findOneAndUpdate({ userID: payload.id }, { $set: { ifStreaming: false } });
+    await Channel.findOneAndUpdate({ userID: payload.id }, { $set: { ifStreaming: false } });
   };
 }

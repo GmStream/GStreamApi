@@ -19,11 +19,24 @@ export class StreamConlroller {
     }
   };
 
+  public getUserStreamKey = async (ctx: Koa.Context) => {
+    const payload = ctx.request.body;
+    try {
+      const id = await this.mainService.getUserStreamKey(payload);
+      ctx.body = {
+        streamId: id
+      };
+      ctx.status = status.OK;
+    } catch (error) {
+      ctx.status = status.BAD_REQUEST;
+    }
+  };
+
   public stopStream = async (ctx: Koa.Context) => {
     const payload = ctx.request.body;
 
     try {
-      await this.mainService.stopstream(payload);
+      await this.mainService.stopStream(payload);
       ctx.status = status.OK;
     } catch (error) {
       ctx.status = status.BAD_REQUEST;
