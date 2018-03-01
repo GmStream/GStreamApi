@@ -13,7 +13,7 @@ export default class ChannelRepository {
 
   public start = async (payload: any) => {
     return await Channel.findOneAndUpdate(
-      { id: payload.id },
+      { userID: payload.id },
       { $set: { ifStreaming: true, streamName: payload.name } }
     );
   };
@@ -29,5 +29,9 @@ export default class ChannelRepository {
         .skip(skip)
         .limit(payload.limit);
     }
+  };
+
+  public stop = async (payload: any) => {
+    return await Channel.findOneAndUpdate({ userID: payload.id }, { $set: { ifStreaming: false } });
   };
 }

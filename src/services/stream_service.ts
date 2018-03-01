@@ -18,4 +18,8 @@ export default class StreamService {
   public loadChannels = async (payload: any) => {
     return await this.repository.loadChannels(payload);
   };
+
+  public stop = async (payload: any) => {
+    return await this.repository.loadChannels(payload);
+  };
 }

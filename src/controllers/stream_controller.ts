@@ -23,7 +23,7 @@ export class StreamConlroller {
     const payload = ctx.request.body;
 
     try {
-      await this.mainService.startStream(payload);
+      await this.mainService.stopstream(payload);
       ctx.status = status.OK;
     } catch (error) {
       ctx.status = status.BAD_REQUEST;

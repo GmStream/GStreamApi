@@ -31,6 +31,10 @@ export default class MainService {
     await this.streamService.start(payload);
   };
 
+  public stopStream = async (payload: any) => {
+    await this.streamService.stop(payload);
+  };
+
   public getChannelByName = async (channelName: string) => {
     return await this.streamService.getByName(channelName);
   };
