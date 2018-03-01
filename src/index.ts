@@ -56,7 +56,6 @@ io.on('connection', sock => {
 
   sock.on('room_message', (payload: any) => {
     io.to(payload.roomId).emit('message', { message: payload.message, user: payload.user });
-    global.console.log(payload.roomId);
   });
 
   sock.on('leave_room', (payload: any) => {

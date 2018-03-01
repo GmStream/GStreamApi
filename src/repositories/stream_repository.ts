@@ -39,4 +39,13 @@ export default class ChannelRepository {
   public stop = async (payload: any) => {
     await Channel.findOneAndUpdate({ _id: payload.id }, { $set: { isStreaming: false } });
   };
+
+  public check = async (payload: any) => {
+    const channel: any = await Channel.findOne({ _id: payload.id });
+    const data = {
+      isStreaming: channel.isStreaming,
+      streamName: channel.streamName
+    };
+    return data;
+  };
 }

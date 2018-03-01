@@ -31,6 +31,17 @@ export class StreamConlroller {
     }
   };
 
+  public check = async (ctx: Koa.Context) => {
+    const payload = ctx.request.body;
+    try {
+      const data = await this.mainService.checkStream(payload);
+      ctx.status = status.OK;
+      ctx.body = data;
+    } catch (error) {
+      ctx.status = status.BAD_REQUEST;
+    }
+  };
+
   public stopStream = async (ctx: Koa.Context) => {
     const payload = ctx.request.body;
     global.console.log(payload);

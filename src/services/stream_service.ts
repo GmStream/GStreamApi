@@ -26,4 +26,8 @@ export default class StreamService {
   public getUserStreamKey = async (payload: any) => {
     return await this.repository.getUserStreamKey(payload);
   };
+
+  public check = async (payload: any) => {
+    return await this.repository.check(payload);
+  };
 }

@@ -23,6 +23,10 @@ export default class MainService {
     });
   };
 
+  public checkStream = async (payload: any) => {
+    return await this.streamService.check(payload);
+  };
+
   public getUserStreamKey = async (payload: any) => {
     const user = await this.getUserByEmail(payload.email);
     const data = {
