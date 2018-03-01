@@ -20,7 +20,7 @@ export default class StreamService {
   };
 
   public stop = async (payload: any) => {
-    await this.repository.loadChannels(payload);
+    await this.repository.stop(payload);
   };
 
   public getUserStreamKey = async (payload: any) => {

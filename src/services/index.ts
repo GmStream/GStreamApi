@@ -24,7 +24,11 @@ export default class MainService {
   };
 
   public getUserStreamKey = async (payload: any) => {
-    return await this.streamService.getUserStreamKey(payload);
+    const user = await this.getUserByEmail(payload.email);
+    const data = {
+      userId: user.id
+    };
+    return await this.streamService.getUserStreamKey(data);
   };
 
   public loadChannels = async (payload: any) => {

@@ -4,7 +4,7 @@ import StreamController from '../controllers/stream_controller';
 
 const router = new Router();
 
-router.post('/sart_stream', StreamController.startStream);
+router.post('/start_stream', StreamController.startStream);
 router.post('/stop_stream', StreamController.stopStream);
-router.post('get_user_stream_key', StreamController.getUserStreamKey);
+router.post('/get_user_stream_key', StreamController.getUserStreamKey);
 export default router;

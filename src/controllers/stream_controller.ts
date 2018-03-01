@@ -10,7 +10,6 @@ export class StreamConlroller {
 
   public startStream = async (ctx: Koa.Context) => {
     const payload = ctx.request.body;
-
     try {
       await this.mainService.startStream(payload);
       ctx.status = status.OK;
@@ -34,7 +33,7 @@ export class StreamConlroller {
 
   public stopStream = async (ctx: Koa.Context) => {
     const payload = ctx.request.body;
-
+    global.console.log(payload);
     try {
       await this.mainService.stopStream(payload);
       ctx.status = status.OK;
