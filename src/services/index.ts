@@ -23,6 +23,10 @@ export default class MainService {
     });
   };
 
+  public updateImage = async (payload: any) => {
+    return await this.streamService.updateImage(payload);
+  };
+
   public checkStream = async (payload: any) => {
     return await this.streamService.check(payload);
   };
@@ -88,13 +92,19 @@ export default class MainService {
     }
   };
 
+  public getChannelByUserId = async (userId: string) => {
+    return await this.streamService.getByUserId(userId);
+  };
+
   public signIn = async (payload: any) => {
     const user = await this.getUserByEmail(payload.email);
     if (user) {
       const isPassMatch = user.comparePassword(payload.password);
       if (isPassMatch && user.confirmed) {
+        const channel = await this.getChannelByUserId(user._id);
         const tokenData = {
           email: user.email,
+          image: channel.image,
           name: user.name
         };
         const token = getToken(tokenData);

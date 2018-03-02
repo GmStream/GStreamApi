@@ -1,6 +1,8 @@
 import * as bcrypt from 'bcrypt-nodejs';
 import * as mongoose from 'mongoose';
 
+import { defaultImage } from '../utils';
+
 import { InterfaceChannel } from '../interfaces';
 
 export interface ISteamModel extends InterfaceChannel, mongoose.Document {
@@ -14,7 +16,7 @@ const ChannelScheme = new mongoose.Schema({
     uniquie: true
   },
   image: {
-    default: '',
+    default: defaultImage,
     type: String
   },
   isStreaming: {

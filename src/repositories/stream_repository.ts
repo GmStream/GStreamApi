@@ -31,6 +31,14 @@ export default class ChannelRepository {
     }
   };
 
+  public updateImage = async (payload: any) => {
+    const channel = await Channel.findOneAndUpdate(
+      { _id: payload.id },
+      { $set: { image: payload.image } }
+    );
+    return channel.image;
+  };
+
   public getUserStreamKey = async (payload: any) => {
     const stream: any = await Channel.findOne({ userId: payload.userId });
     return stream.id;
@@ -47,5 +55,9 @@ export default class ChannelRepository {
       streamName: channel.streamName
     };
     return data;
+  };
+
+  public getByUserId = async (userId: string) => {
+    return await Channel.findOne({ userId });
   };
 }

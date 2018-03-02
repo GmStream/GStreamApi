@@ -44,11 +44,23 @@ export class StreamConlroller {
 
   public stopStream = async (ctx: Koa.Context) => {
     const payload = ctx.request.body;
-    global.console.log(payload);
     try {
       await this.mainService.stopStream(payload);
       ctx.status = status.OK;
     } catch (error) {
+      ctx.status = status.BAD_REQUEST;
+    }
+  };
+
+  public changeImage = async (ctx: Koa.Context) => {
+    const payload = ctx.request.body;
+    try {
+      const image = await this.mainService.updateImage(payload);
+      ctx.status = status.OK;
+      ctx.body = {
+        image
+      };
+    } catch (err) {
       ctx.status = status.BAD_REQUEST;
     }
   };

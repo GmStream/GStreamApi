@@ -30,4 +30,12 @@ export default class StreamService {
   public check = async (payload: any) => {
     return await this.repository.check(payload);
   };
+
+  public updateImage = async (payload: any) => {
+    return await this.repository.updateImage(payload);
+  };
+
+  public getByUserId = async (userId: string) => {
+    return await this.repository.getByUserId(userId);
+  };
 }
