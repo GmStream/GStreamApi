@@ -2,7 +2,7 @@ import ERROR_CODES from './error_codes';
 import ValidationError from './errors/validation_errors';
 
 import * as jwt from 'jsonwebtoken';
-import { jwtSecret, mail, url } from '../config';
+import { jwtSecret } from '../config';
 
 export const nameRegExp = new RegExp(`^[a-zA-Zа-яёА-ЯЁ\s\'\-]+$`);
 export const passwordRegExp = new RegExp('^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$');
@@ -49,4 +49,3 @@ export const decodeToken = (token: string) => {
   });
   return decoded;
 };
-

@@ -1,12 +1,8 @@
-import * as bcrypt from 'bcrypt-nodejs';
 import * as mongoose from 'mongoose';
-
 
 import { InterfaceChannel } from '../interfaces';
 
-export interface ISteamModel extends InterfaceChannel, mongoose.Document {
-  comparePassword(candidatePassword: string): boolean;
-}
+export interface ISteamModel extends InterfaceChannel, mongoose.Document {}
 
 const ChannelScheme = new mongoose.Schema({
   channelName: {

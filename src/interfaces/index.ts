@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose'
+import * as mongoose from 'mongoose';
 
 export interface InterfaceUser {
   confirmed: boolean;
@@ -19,9 +19,10 @@ export interface InterfaceChannel {
   channelName: string;
   userId: mongoose.Schema.Types.ObjectId;
   image: string;
-  isStreaming:boolean;
+  isStreaming: boolean;
 }
 
 export interface InterfaceStream {
-    channelId:mongoose.Schema.Types.ObjectId
+  channelId: mongoose.Schema.Types.ObjectId;
+  name: string;
 }

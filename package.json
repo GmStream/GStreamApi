@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "nodemon -w src -x ts-node  src/index.ts",
     "test": "NODE_ENV=${NODE_ENV:=test}  mocha --exit --timeout 15000 -r  ts-node/register spec/**/*.ts",
-    "test:coverage": "NODE_ENV=${NODE_ENV:=test} nyc mocha --exit --timeout 15000 -r  ts-node/register spec/**/*.ts && nyc report --reporter=text-lcov | coveralls"
+    "test:coverage": "NODE_ENV=${NODE_ENV:=test} nyc mocha --exit --timeout 15000 -r  ts-node/register spec/**/*.ts && nyc report --reporter=text-lcov | coveralls",
+    "prepublish": "prettier --list-different --config ./.prettierrc --write ./src/**/*.ts"
   },
   "engines": {
     "node": "9.2.0"
