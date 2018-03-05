@@ -9,6 +9,4 @@ streamName:{
     default:'',
     type:String
 }
-
-
 }

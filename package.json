@@ -7,19 +7,28 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon -w src -x ts-node  src/index.ts",
-    "test":
-      "NODE_ENV=${NODE_ENV:=test}  mocha --exit --timeout 15000 -r  ts-node/register spec/**/*.ts",
-    "test:coverage":
-      "NODE_ENV=${NODE_ENV:=test} nyc mocha --exit --timeout 15000 -r  ts-node/register spec/**/*.ts && nyc report --reporter=text-lcov | coveralls"
+    "test": "NODE_ENV=${NODE_ENV:=test}  mocha --exit --timeout 15000 -r  ts-node/register spec/**/*.ts",
+    "test:coverage": "NODE_ENV=${NODE_ENV:=test} nyc mocha --exit --timeout 15000 -r  ts-node/register spec/**/*.ts && nyc report --reporter=text-lcov | coveralls"
   },
   "engines": {
     "node": "9.2.0"
   },
   "nyc": {
-    "include": ["src/**/*.ts"],
-    "extension": [".ts", ".js", ".tsx"],
-    "require": ["ts-node/register"],
-    "reporter": ["text", "html"],
+    "include": [
+      "src/**/*.ts"
+    ],
+    "extension": [
+      ".ts",
+      ".js",
+      ".tsx"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "text",
+      "html"
+    ],
     "sourceMap": true,
     "instrument": true,
     "all": true
@@ -49,6 +58,7 @@
     "jsonwebtoken": "^8.1.1",
     "koa": "^2.4.1",
     "koa-bodyparser": "^4.2.0",
+    "koa-helmet": "^3.3.0",
     "koa-jwt": "^3.3.0",
     "koa-logger": "^3.1.0",
     "koa-morgan": "^1.0.1",

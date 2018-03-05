@@ -11,6 +11,11 @@ import * as mongoose from 'mongoose';
 import * as socket from 'socket.io';
 import routes from './routes';
 
+// tslint:disable-next-line:no-var-requires
+const helmet = require('koa-helmet');
+
+
+
 import appLogger from './utils/logger';
 
 // tslint:disable-next-line:no-var-requires
@@ -36,6 +41,7 @@ if (process.env.NODE_ENV === 'production') {
 const app = new Koa();
 
 app
+  .use(helmet())
   .use(cors())
   .use(bodyParser())
   .use(logger())
