@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 
-import { ChannelScheme, ISteamModel } from './stream_scheme';
+import { ChannelScheme, ISteamModel } from './channel_scheme';
 import { IUserModel, UserSchema } from './user_schema';
 
 export const User: mongoose.Model<IUserModel> = mongoose.model<IUserModel>('User', UserSchema);

@@ -1,5 +1,5 @@
 import { Channel } from '../schemes/';
-import { ISteamModel } from '../schemes/stream_scheme';
+import { ISteamModel } from '../schemes/channel_scheme';
 
 export default class ChannelRepository {
   public create = async (payload: any) => {

@@ -1,4 +1,4 @@
-import { ISteamModel } from '../schemes/stream_scheme';
+import { ISteamModel } from '../schemes/channel_scheme';
 import { IUserModel } from '../schemes/user_schema';
 import { getToken } from '../utils';
 import ERROR_CODES from '../utils/error_codes';

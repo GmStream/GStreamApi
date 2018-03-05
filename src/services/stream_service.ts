@@ -1,5 +1,5 @@
 import StreamRepository from '../repositories/stream_repository';
-import { ISteamModel } from '../schemes/stream_scheme';
+import { ISteamModel } from '../schemes/channel_scheme';
 
 export default class StreamService {
   public repository = new StreamRepository();

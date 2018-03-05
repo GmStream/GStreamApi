@@ -1,10 +1,12 @@
+import * as mongoose from 'mongoose'
+
 export interface InterfaceUser {
   confirmed: boolean;
   email: string;
   interfaceLang: string;
   name: string;
   password: string;
-  subscribtion: string[];
+  subscribtion: mongoose.Schema.Types.ObjectId[];
 }
 
 export interface InterfaceUserPayload {
@@ -15,6 +17,11 @@ export interface InterfaceUserPayload {
 
 export interface InterfaceChannel {
   channelName: string;
-  userId: string;
+  userId: mongoose.Schema.Types.ObjectId;
   image: string;
+  isStreaming:boolean;
+}
+
+export interface InterfaceStream {
+    channelId:mongoose.Schema.Types.ObjectId
 }
