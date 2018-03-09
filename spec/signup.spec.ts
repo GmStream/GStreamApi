@@ -7,11 +7,14 @@ import MainService from '../src/services';
 
 const mainService = new MainService();
 const payload = {
-  channelName: 'bugurt',
   email: 'yas.pup@gmail.com',
   name: 'Yasya',
   password: 'bghjktyf2132!'
 };
+
+const channelPayload = {
+    channelName: 'bugurt'
+}
 
 describe('Sign Up specs', () => {
   beforeEach(async () => {
@@ -22,7 +25,7 @@ describe('Sign Up specs', () => {
     const user = await mainService.getUserByEmail(payload.email);
     assert.equal(user.email, payload.email);
     assert.equal(user.name, payload.name);
-    assert.equal(user.channelName, payload.channelName);
+  //  assert.equal(user.channelName, payload.channelName);
     assert.equal(user.confirmed, false);
   });
 
